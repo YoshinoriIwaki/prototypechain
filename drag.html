@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>drag</title>
+    <script>
+        window.onload = function(){
+            var box = elt("div", null, "JavaScript");
+            document.body.appendChild(box);
+            var boxOffsetX, boxOffsetY;
+            //parameter setting
+            box.style.display = "inline-block";
+            box.style.position = "absolute";
+            box.style.padding = "10px";
+            box.style.backgroundColor = "blue";
+            box.style.color = "white";
+            box.style.cursor = "pointer";
+
+            //event lister
+            box.addEventLister("mousedown", function mouseDownListener(e){
+                document.addEventListener("mousemove", mouseMoveListener, false);
+                boxOffsetX = e.offsetX;
+                boxOffsetY = e.offsetY;
+            },false);
+            document.addEventListener("mouseup", function mouseUpListener(e){
+                document.removeEventListener("mousemove", mouseMoveListener, false);
+            },false);
+            function mouseMoveListener(e){
+                box.style.left = e.pageX - boxOffsetX + "px";
+                box.style.top = e.pageY - boxOffsetY + "py";
+            }
+        };
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
